@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-    
+
     <div v-if="!isAuthenticated">
-      <h3>Zaloguj się e-mailem: {{email}} </h3>
-      <input type="email" v-model="email">
-      <button @click="login()">Wchodzę</button>
+      <login-form @login="login($event)" button-label="Wejdź"></login-form>
+      <login-form @login="login($event)" button-label="Wleć"></login-form>
+      <login-form @login="login($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
     </div>
 
-    <div v-if="isAuthenticated">
-      <h3>Witaj {{email}}</h3>
+
+    <div v-else>
+      <h3>Witaj {{isAuthenticated}}</h3>
       <a @click="logout()">Wyloguj</a>
     </div>
 
@@ -19,8 +20,11 @@
 <script>
 
 import "milligram";
+import LoginForm from "./LoginForm";
 
 export default {
+
+    components:{LoginForm},
 
     data() {
       return {
@@ -30,14 +34,14 @@ export default {
     },
     
     methods: {
-      login() {
-        this.isAuthenticated = true;
+      login(username) {
+        this.isAuthenticated = username;
       },
 
       logout() {
         this.isAuthenticated = false;
         this.email = "";
-      }
+      },
 
     }
 
