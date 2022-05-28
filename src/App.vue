@@ -3,15 +3,11 @@
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
 
     <div v-if="!isAuthenticated">
-      <login-form @login="login($event)" button-label="Wejdź"></login-form>
-      <login-form @login="login($event)" button-label="Wleć"></login-form>
-      <login-form @login="login($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
+      <login-form @login="login($event)"></login-form>
     </div>
 
-
     <div v-else>
-      <h3>Witaj {{isAuthenticated}}</h3>
-      <a @click="logout()">Wyloguj</a>
+      <home-page @logout="logout($event)" :username = this.isAuthenticated></home-page>
     </div>
 
   </div>
@@ -21,10 +17,11 @@
 
 import "milligram";
 import LoginForm from "./LoginForm";
+import HomePage from "./HomePage.vue";
 
 export default {
 
-    components:{LoginForm},
+    components:{LoginForm, HomePage},
 
     data() {
       return {
@@ -38,9 +35,8 @@ export default {
         this.isAuthenticated = username;
       },
 
-      logout() {
-        this.isAuthenticated = false;
-        this.email = "";
+      logout(status) {
+        this.isAuthenticated = status;
       },
 
     }

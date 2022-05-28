@@ -14,6 +14,12 @@ export default {
 
     props: ['buttonLabel'],
 
+    mounted () {
+      if (!this.buttonLabel){
+        this.buttonLabel = "Wejdź"
+      }
+    },
+
     data() {
       return {
         email: ''
