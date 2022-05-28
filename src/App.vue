@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <h1>E-mail: {{ email}} </h1>
+    <h1>Witaj w systemie do zapisów na zajęcia</h1>
+    
+    <div v-if="logged == false">
+      <h3>Zaloguj się e-mailem: {{email}} </h3>
+      <input type="email" v-model="email">
+      <button @click="login()">Wchodzę</button>
+    </div>
 
-    <div v-if="email.length < 10">Ale masz krótki adres!</div>
-    <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
-    <div v-else class="red">Twój adres e-mail jest stanowczo za długi.</div>
-    <input type="email" v-model="email">
 
-    <button @click="alertMyEmail()">Send</button>
+    <div v-if="logged == true">
+      <h3>Witaj {{email}}</h3>
+      <button @click="logout()">Wyloguj</button>
+    </div>
 
   </div>
 </template>
@@ -20,14 +25,25 @@ export default {
 
     data() {
       return {
-        email: ''
+        email: '',
+        logged: false
       }
     },
     
     methods: {
       alertMyEmail() {
         alert(this.email);
+      },
+
+      login() {
+        this.logged = true;
+      },
+
+      logout() {
+        this.logged = false;
+        this.email = "";
       }
+
     }
 
   }
