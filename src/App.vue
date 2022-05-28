@@ -7,7 +7,7 @@
     </div>
 
     <div v-else>
-      <home-page @logout="logout($event)" :username = this.isAuthenticated></home-page>
+      <home-page @logout="logout()" :username = this.isAuthenticated></home-page>
     </div>
 
   </div>
@@ -35,8 +35,8 @@ export default {
         this.isAuthenticated = username;
       },
 
-      logout(status) {
-        this.isAuthenticated = status;
+      logout() {
+        this.isAuthenticated = false;
       },
 
     }

@@ -7,9 +7,6 @@
 </template>
 
 <script>
-
-import "milligram";
-
 export default {
 
     props: ['buttonLabel'],

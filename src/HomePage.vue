@@ -8,16 +8,13 @@
 </template>
 
 <script>
-
-import "milligram";
-
 export default {
 
     props: ['username'],
 
     methods: {
       logout() {
-          this.$emit('logout', false);
+          this.$emit('logout');
       }
     }
    }
